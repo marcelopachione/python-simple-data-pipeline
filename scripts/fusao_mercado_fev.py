@@ -8,7 +8,9 @@ path_csv = 'data_raw/dados_empresaB.csv'
 
 # Extracting the data from the files
 empresaA = Dados(path_json, 'json')
+print(empresaA.size_data())
 empresaB = Dados(path_csv, 'csv')
+print(empresaB.size_data())
 
 # Transform
 key_mapping = {'Nome do Item': 'Nome do Produto',
@@ -20,6 +22,12 @@ key_mapping = {'Nome do Item': 'Nome do Produto',
 
 empresaB.rename_columns(key_mapping)
 print(empresaB.nomes_colunas)
+
+dados_fusaso = Dados.join(empresaA, empresaB)
+print(dados_fusaso.nomes_colunas)
+print(dados_fusaso.qtd_linhas)
+
+## Load
 
 # Iniciando a leitura
 # dados_json = leitura_dados(path_json,'json')

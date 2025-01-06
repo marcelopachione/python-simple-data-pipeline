@@ -8,6 +8,7 @@ class Dados:
         self.tipo_dados = tipo_dados
         self.dados = self.leitura_dados()
         self.nomes_colunas = self.get_columns()
+        self.qtd_linhas = self.size_data()
         #self.renomeia_colunas = self.rename_columns()
     
     def leitura_json(self):
@@ -33,6 +34,10 @@ class Dados:
             
         elif self.tipo_dados == 'json': 
             dados = self.leitura_json()
+        
+        elif self.tipo_dados == 'list':
+            dados = self.path
+            self.path = 'List in Memory'
             
         return dados
 
@@ -51,14 +56,17 @@ class Dados:
         self.dados = new_dados
         self.nomes_colunas = self.get_columns()
 
-    # def size_data(dados):
-    #     return len(dados)
 
-    # def join(dadosA, dadosB):
-    #     combined_list = []
-    #     combined_list.extend(dadosA)
-    #     combined_list.extend(dadosB)
-    #     return combined_list
+    def size_data(self):
+        return len(self.dados)
+
+    
+    def join(dadosA, dadosB):
+        combined_list = []
+        combined_list.extend(dadosA.dados)
+        combined_list.extend(dadosB.dados)
+
+        return Dados(combined_list, 'list')
 
     # def transformando_dados_tabela(dados, nomes_colunas):
         
