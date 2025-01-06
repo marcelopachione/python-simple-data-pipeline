@@ -68,19 +68,20 @@ class Dados:
 
         return Dados(combined_list, 'list')
 
-    # def transformando_dados_tabela(dados, nomes_colunas):
-        
-    #     dados_combinados_tabela = [nomes_colunas]
+    def transformando_dados_tabela(self):
+        dados_combinados_tabela = [self.nomes_colunas]
 
-    #     for row in dados:
-    #         linha = []
-    #         for coluna in nomes_colunas:
-    #             linha.append(row.get(coluna, 'Indisponivel'))
-    #         dados_combinados_tabela.append(linha)
-        
-    #     return dados_combinados_tabela
+        for row in self.dados:
+            linha = []
+            for coluna in self.nomes_colunas:
+                linha.append(row.get(coluna, 'Indisponivel'))
+            dados_combinados_tabela.append(linha)
 
-    # def salvando_dados(dados, path):
-    #     with open(path, 'w') as file:
-    #         writer = csv.writer(file)
-    #         writer.writerows(dados)
+        return dados_combinados_tabela
+
+    def salvando_dados(self, path):
+        dados_combinados_table = self.transformando_dados_tabela()
+
+        with open(path, 'w') as file:
+            writer = csv.writer(file)
+            writer.writerows(dados_combinados_table)
